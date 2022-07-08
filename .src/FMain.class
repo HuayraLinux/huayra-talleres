@@ -1,0 +1,112 @@
+' Gambas class file
+
+Public Sub nuevo_Click()
+
+  'mirar en remoto cual es la última carpeta, el ID será ese numero + 1
+  'crear carpeta remota 
+  
+  Dim participanteID As Integer
+  
+  Shell "mkdir -p /home/estudiante/.talleres/" Wait
+
+  'creo la carpeta nueva en el servidor remoto y la monto en /.talleres  OJO luego hago un enlace ver abajo
+  Shell "sshfs -o reconnect -o password_stdin -p 22 cap@192.168.1.1:/home/cap/remoto_cap /home/estudiante/.talleres <<< 'CONTRASEÑA'" Wait
+
+  
+  
+  Dim ultimaCarpeta As String = buscarUltimaCarpeta("/home/estudiante/.talleres")
+  
+    participanteID = Val(ultimaCarpeta) + 1 'participanteID es el código único de usuarix
+  
+  id.Text = participanteID
+  nuevo.visible = False
+  
+ 
+  Shell "mkdir -p /home/estudiante/.talleres/" & participanteID Wait
+  
+  'hago un enlace de la carpeta del usuario a /home/estudiante/talleres
+  Shell "rm -f /home/estudiante/talleres" Wait
+  Shell "ln -s /home/estudiante/.talleres/" & participanteID & " /home/estudiante/talleres" Wait
+  
+  '
+  '
+  ' ####### modifica esta ruta con la ruta final donde quedará instalada la aplicación
+  Shell "cp /usr/share/huayra-talleres/templates/audacity.mp3 /home/estudiante/.talleres/" & participanteID & "/" Wait
+  Shell "cp /usr/share/huayra-talleres/templates/pencil2d.pclx /home/estudiante/.talleres/" & participanteID & "/" Wait
+  Shell "cp /usr/share/huayra-talleres/templates/scratch.sb3 /home/estudiante/.talleres/" & participanteID & "/" Wait
+End
+
+
+Public Sub id_change()
+
+  If id.Text <> "" Then
+   nuevo.Visible = False
+    Else
+      nuevo.Visible = True
+    
+  Endif
+  If id.Text.len = 5 Then
+    app1.Visible = True
+    app2.Visible = True
+    app3.Visible = True
+    app4.Visible = True
+    
+    'hago un enlace de la carpeta del usuario a /home/estudiante/talleres
+    Shell "rm -f /home/estudiante/talleres" Wait
+    Shell "ln -s /home/estudiante/.talleres/" & id.Text & " /home/estudiante/talleres" Wait
+  
+    Else
+      app1.visible = False
+      app2.visible = False
+      app3.Visible = False
+      app4.Visible = False
+      
+  Endif
+
+End
+
+Public Sub reset_Click()
+
+ nuevo.Visible = True
+ app1.Visible = True
+ app2.Visible = True
+ app3.Visible = True
+ app4.Visible = True
+
+End
+
+Sub buscarUltimaCarpeta(sDirectory As String) As String
+
+  Dim sFile As String
+  Dim ultima As String
+
+  For Each sFile In Dir(sDirectory).Sort()
+    ultima = sFile
+  Next
+ Return ultima
+End
+
+
+Public Sub app1_Click()
+
+  Shell "pencil2d /home/estudiante/.talleres/" & id.Text & "/pencil2d.pclx" Wait
+
+End
+Public Sub app2_Click()
+
+  Shell "lmms /home/estudiante/.talleres/" & id.Text & "/lmms.algp" Wait
+
+End
+
+Public Sub app3_Click()
+
+  Shell "audacity /home/estudiante/.talleres/" & id.Text & "/audacity.mp3" Wait
+
+End
+
+Public Sub app4_Click()
+
+  Shell "scratux /home/estudiante/.talleres/" & id.Text & "/scratch.sb3" Wait
+
+End
+

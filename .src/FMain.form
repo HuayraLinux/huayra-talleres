@@ -1,0 +1,49 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,95,53)
+  Text = ("Huayra-talleres")
+  Resizable = False
+  { id TextBox
+    MoveScaled(25,17,46,16)
+    Font = Font["Press Start 2P,+12"]
+    Alignment = Align.Center
+    MaxLength = 5
+  }
+  { Label1 Label
+    MoveScaled(6,20,17,10)
+    Font = Font["+9"]
+    Text = ("ID")
+    Alignment = Align.Right
+  }
+  { app1 Button
+    MoveScaled(40,37,12,12)
+    Visible = False
+    Picture = Picture["icono1.png"]
+  }
+  { reset Button
+    MoveScaled(4,46,16,4)
+    Visible = False
+    Text = ("reset")
+  }
+  { app3 Button
+    MoveScaled(66,37,12,12)
+    Visible = False
+    Picture = Picture["icono3.png"]
+  }
+  { app4 Button
+    MoveScaled(79,37,12,12)
+    Visible = False
+    Picture = Picture["icono4.png"]
+  }
+  { app2 Button
+    MoveScaled(53,37,12,12)
+    Visible = False
+    Picture = Picture["icono2.png"]
+  }
+  { nuevo Button
+    MoveScaled(59,4,32,8)
+    Font = Font["+4"]
+    Text = ("Nuevo Participante")
+  }
+}

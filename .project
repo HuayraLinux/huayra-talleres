@@ -1,0 +1,22 @@
+# Gambas Project File 3.0
+Title=Huayra-talleres
+Startup=FMain
+Version=0.1.0
+Component=gb.image
+Component=gb.gtk
+Component=gb.form
+TabSize=2
+Translate=1
+Language=en_US
+Maintainer=Diego Accorinti
+Address=daccorinti@educar.gob.ar
+License=General Public License
+PackageName=huayra-talleres-0.1.0
+PackageVersion=2
+Packager=1
+Systems=debian
+Menus=debian:"Applications/Education"
+Categories=debian:"Education;Huayra"
+Groups=debian:"education"
+ExtraDependencies=debian:"audacity\t\t\nlmms\t\t\npencil2d\t\t"
+ExtraFiles=debian:"audacity.mp3\t/usr/share/huayra-talleres/templates\npencil2d.pclx\t/usr/share/huayra-talleres/templates\nscratch.sb3\t/usr/share/huayra-talleres/templates"

@@ -1,0 +1,31 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"#-#-#-#-#  #project.pot (huayra-talleres 3.12.2)  #-#-#-#-#\n"
+"Project-Id-Version: huayra-talleres 3.12.2\n"
+"POT-Creation-Date: 2022-07-07 19:10 UTC\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  FMain.pot ($(PACKAGE) $(VERSION))  #-#-#-#-#\n"
+"Project-Id-Version: $(PACKAGE) $(VERSION)\n"
+"POT-Creation-Date: 2022-07-07 19:10 UTC\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .project:1 FMain.form:15
+msgid "Huayra-talleres"
+msgstr ""
+
+#: FMain.form:28
+msgid "ID"
+msgstr ""
+
+#: FMain.form:41
+msgid "reset"
+msgstr ""
+
+#: FMain.form:65
+msgid "Nuevo Participante"
+msgstr ""
