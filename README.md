@@ -13,11 +13,14 @@ Luego, una vez terminado el trabajo del participante, no hace falta copiar archi
 
 
 ------------------
-Detalles técnicos:
+Implementación:
 
 El servidor remoto debe tener una carpeta en /home/cap/cap_remoto  donde se guardará la información.
 
-# importante
+1)  clonar el repo.
+2) modificar la línea de conexión al servidor remoto. No olvidar reemplazar la palabra "CONTRASEÑA" por la correspondiente. En el archivo FMain.class  modificar la siguiente línea:
 
-Para implementar se debe modificar en el formulario de la aplicación la contraseña para poder conectar al CAP, señalada con la palabra "CONTRASEÑA".
+ Shell "sshfs -o reconnect -o password_stdin -p 22 cap@192.168.1.1:/home/cap/remoto_cap /home/estudiante/.talleres <<< 'CONTRASEÑA'" Wait
+ 
+3) Ir a "Proyecto" -> "Crear" -> "Generar paquete".
 
