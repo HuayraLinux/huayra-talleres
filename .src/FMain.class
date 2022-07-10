@@ -1,18 +1,21 @@
 ' Gambas class file
 
+Public Sub Form_Open()
+  
+   Shell "mkdir -p /home/estudiante/.talleres/" Wait
+
+  'creo la carpeta nueva en el servidor remoto y la monto en /.talleres  OJO luego hago un enlace ver abajo
+  Shell "sshfs -o reconnect -o password_stdin -p 22 cap@192.168.1.1:/home/cap/remoto_cap /home/estudiante/.talleres <<< 'CONTRASEÑA'" Wait
+  
+End
+
 Public Sub nuevo_Click()
 
   'mirar en remoto cual es la última carpeta, el ID será ese numero + 1
   'crear carpeta remota 
   
   Dim participanteID As Integer
-  
-  Shell "mkdir -p /home/estudiante/.talleres/" Wait
-
-  'creo la carpeta nueva en el servidor remoto y la monto en /.talleres  OJO luego hago un enlace ver abajo
-  Shell "sshfs -o reconnect -o password_stdin -p 22 cap@192.168.1.1:/home/cap/remoto_cap /home/estudiante/.talleres <<< 'CONTRASEÑA'" Wait
-
-  
+   
   
   Dim ultimaCarpeta As String = buscarUltimaCarpeta("/home/estudiante/.talleres")
   
@@ -30,7 +33,6 @@ Public Sub nuevo_Click()
   
   '
   '
-  ' ####### modifica esta ruta con la ruta final donde quedará instalada la aplicación
   Shell "cp /usr/share/huayra-talleres/templates/audacity.mp3 /home/estudiante/.talleres/" & participanteID & "/" Wait
   Shell "cp /usr/share/huayra-talleres/templates/pencil2d.pclx /home/estudiante/.talleres/" & participanteID & "/" Wait
   Shell "cp /usr/share/huayra-talleres/templates/scratch.sb3 /home/estudiante/.talleres/" & participanteID & "/" Wait
