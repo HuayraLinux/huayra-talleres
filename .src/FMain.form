@@ -46,4 +46,9 @@
     Font = Font["+4"]
     Text = ("Nuevo Participante")
   }
+  { app0 Button
+    MoveScaled(27,37,12,12)
+    Visible = False
+    Picture = Picture["icon:/64/directory"]
+  }
 }

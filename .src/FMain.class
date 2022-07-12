@@ -1,11 +1,19 @@
 ' Gambas class file
 
-Public Sub Form_Open()
+
+' TODO  
+' reemplazar /home/estudiante  por ~/
+' mover los templates a CAP  en vez de que estén en el paquete
+' archivo de configuración en el CAP para activar / desactivar aplicaciones
+
+
+Public Sub Form_Show()
   
    Shell "mkdir -p /home/estudiante/.talleres/" Wait
 
-  'creo la carpeta nueva en el servidor remoto y la monto en /.talleres  OJO luego hago un enlace ver abajo
-  Shell "sshfs -o reconnect -o password_stdin -p 22 cap@192.168.1.1:/home/cap/remoto_cap /home/estudiante/.talleres <<< 'CONTRASEÑA'" Wait
+  ''creo la carpeta nueva en el servidor remoto y la monto en /.talleres  OJO luego hago un enlace ver abajo
+  'Shell "sshfs -o reconnect -o password_stdin -p 22 cap@192.168.1.1:/home/cap/remoto_cap /home/estudiante/.talleres <<< 'dirmod2019'" Wait
+  Shell "echo 'CONTRASEÑA' | sshfs -o reconnect -o password_stdin -p 22 cap@192.168.1.1:/home/cap/remoto_cap /home/estudiante/.talleres" Wait
   
 End
 
@@ -32,10 +40,8 @@ Public Sub nuevo_Click()
   Shell "ln -s /home/estudiante/.talleres/" & participanteID & " /home/estudiante/talleres" Wait
   
   '
-  '
-  Shell "cp /usr/share/huayra-talleres/templates/audacity.mp3 /home/estudiante/.talleres/" & participanteID & "/" Wait
-  Shell "cp /usr/share/huayra-talleres/templates/pencil2d.pclx /home/estudiante/.talleres/" & participanteID & "/" Wait
-  Shell "cp /usr/share/huayra-talleres/templates/scratch.sb3 /home/estudiante/.talleres/" & participanteID & "/" Wait
+  Shell "cp -R /usr/share/huayra-talleres/templates/* /home/estudiante/.talleres/" & participanteID & "/" Wait
+
 End
 
 
@@ -48,6 +54,7 @@ Public Sub id_change()
     
   Endif
   If id.Text.len = 5 Then
+    app0.visible = True
     app1.Visible = True
     app2.Visible = True
     app3.Visible = True
@@ -58,6 +65,7 @@ Public Sub id_change()
     Shell "ln -s /home/estudiante/.talleres/" & id.Text & " /home/estudiante/talleres" Wait
   
     Else
+      app0.visible = False
       app1.visible = False
       app2.visible = False
       app3.Visible = False
@@ -67,15 +75,6 @@ Public Sub id_change()
 
 End
 
-Public Sub reset_Click()
-
- nuevo.Visible = True
- app1.Visible = True
- app2.Visible = True
- app3.Visible = True
- app4.Visible = True
-
-End
 
 Sub buscarUltimaCarpeta(sDirectory As String) As String
 
@@ -96,7 +95,7 @@ Public Sub app1_Click()
 End
 Public Sub app2_Click()
 
-  Shell "lmms /home/estudiante/.talleres/" & id.Text & "/lmms.algp" Wait
+  Shell "lmms /home/estudiante/.talleres/" & id.Text & "/lmms.mmpz" Wait
 
 End
 
@@ -112,3 +111,9 @@ Public Sub app4_Click()
 
 End
 
+
+Public Sub app0_Click()
+
+  Shell "caja /home/estudiante/talleres" Wait
+
+End
