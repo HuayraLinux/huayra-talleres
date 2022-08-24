@@ -1,6 +1,14 @@
 ' Gambas class file
 
+'' HUAYRA TALLERES · 2022  EQUIPO HUAYRA
+'' Licencia GPL3
 
+'' Desarrolladores
+''   Diego Accorinti
+''   Matías De Lelis
+''   Santiago Peralta
+
+'' 
 ' TODO  
 ' reemplazar /home/estudiante  por ~/
 ' mover los templates a CAP  en vez de que estén en el paquete
@@ -9,11 +17,19 @@
 
 Public Sub Form_Show()
   
-   Shell "mkdir -p /home/estudiante/.talleres/" Wait
 
+  Dim mString As String
+
+  Shell "killall sshfs" Wait
+  
+  Shell "mkdir -p /home/estudiante/.talleres/" Wait To mString
+  consola.Text = mString
+
+  consola.Text = "Conectando al servidor remoto..."
   ''creo la carpeta nueva en el servidor remoto y la monto en /.talleres  OJO luego hago un enlace ver abajo
-  'Shell "sshfs -o reconnect -o password_stdin -p 22 cap@192.168.1.1:/home/cap/remoto_cap /home/estudiante/.talleres <<< 'dirmod2019'" Wait
-  Shell "echo 'CONTRASEÑA' | sshfs -o reconnect -o password_stdin -p 22 cap@192.168.1.1:/home/cap/remoto_cap /home/estudiante/.talleres" Wait
+  '' La opción "StrictHostKeyChecking=no" evita que SSHFS pregunte si agrega el host a la lista de host confiables.
+  
+  Shell "echo 'contraseña' | sshfs -o reconnect -o StrictHostKeyChecking=no -o password_stdin -p 22 cap@192.168.1.1:/home/cap/remoto_cap /home/estudiante/.talleres 2>&1" Wait
   
 End
 
@@ -115,5 +131,14 @@ End
 Public Sub app0_Click()
 
   Shell "caja /home/estudiante/talleres" Wait
+
+End
+
+
+
+Public Sub Form_Close()
+
+  Shell "killall sshfs" Wait
+  
 
 End

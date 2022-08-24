@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,95,53)
+  MoveScaled(0,0,95,65)
   Text = ("Huayra-talleres")
   Resizable = False
   { id TextBox
@@ -50,5 +50,12 @@
     MoveScaled(27,37,12,12)
     Visible = False
     Picture = Picture["icon:/64/directory"]
+  }
+  { consola TextArea
+    MoveScaled(0,54,95,11)
+    Visible = False
+    Font = Font["Asap,+3"]
+    Background = Color.DarkGray
+    Foreground = Color.Green
   }
 }
